@@ -1,0 +1,15 @@
+{
+  "name": "squash",
+  "version": "1.0.0",
+  "description": "Simple Squash game in p5.js",
+  "main": "app.js",
+  "author": "Miloš Tomšik",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "live-server"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.0"
+  }
+}
