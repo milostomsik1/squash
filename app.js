@@ -37,10 +37,10 @@ function draw() {
 
   // Ball
   ball.draw();
-  ball.move();
-
+  ball.move(paddle);
+  ball.bounce();
   if (ball.hitsPaddle(paddle)) score.addPoint();
-  if (ball.hitsRedWallOfDoom(redWallOfDoom)) resetGame();
+  if (ball.missedPaddle(paddle, redWallOfDoom)) resetGame();
 }
 
 function keyPressed() {

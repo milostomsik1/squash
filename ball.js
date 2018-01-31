@@ -7,8 +7,10 @@ class Ball {
     this.minYSpeed = 3;
     this.maxYSpeed = 10;
 
-    this.speedX = 15;
+    this.speedX = 10;
     this.speedY = Math.round(Math.random() * (this.maxYSpeed  - this.minYSpeed) + this.minYSpeed);
+    // this.speedY = 0;
+    this.missedFlag = false;
   }
 
   draw() {
@@ -17,37 +19,57 @@ class Ball {
     ellipse(this.x, this.y, this.r * 2);
   }
 
-  hitsScreenBottom() { return this.y >= window.innerHeight - this.r; }
-  hitsScreenTop() { return this.y <= this.r; }
-  hitsScreenRight() { return this.x >= windowWidth - this.r; }
-
-  move() {
-    if (this.hitsScreenBottom() || this.hitsScreenTop()) {
-      this.speedY = this.speedY * -1;
-    }
-    if (this.hitsScreenRight()) {
-      this.speedX = this.speedX * -1;
-    }
+  move(paddle) {
     this.x += this.speedX;
+    const passedThruPaddle = () => this.x - this.r <= paddle.x + paddle.width;
+    const isAboveOrUnderPaddle = () => this.y < paddle.y && this.y > paddle.y + paddle.height;
+
+    if (passedThruPaddle() &&
+        isAboveOrUnderPaddle()) {
+      this.x = paddle.x + paddle.width + this.r;
+    }
     this.y += this.speedY;
   }
 
-  hitsPaddle(paddle) {
-    const isLeftOfPaddle = () => this.x <= paddle.x;
+  bounce() {
+    const hitsWindowBottom = () => this.y >= window.innerHeight - this.r;
+    const hitsWindowTop = () => this.y <= this.r;
+    const hitsWindowRight = () => this.x >= windowWidth - this.r;
 
-    if (isLeftOfPaddle()) {
-      if (this.y > paddle.y && this.y < paddle.y + paddle.height) {
-        this.speedX = this.speedX * -1;
-        return true;
-      }
+    if (hitsWindowBottom() || hitsWindowTop()) {
+      this.speedY = this.speedY * -1;
+    }
+    if (hitsWindowRight()) {
+      this.speedX = this.speedX * -1;
+    }
+  }
+
+  hitsPaddle(paddle) {
+    const passedThruPaddle = () => this.x - this.r <= paddle.x + paddle.width;
+    const isMovingTowardsPaddle = () => this.speedX < 0;
+    const isBetweenPaddleTopAndBottom = () => this.y >= paddle.y && this.y <= paddle.y + paddle.height;
+
+    if (passedThruPaddle() &&
+        isBetweenPaddleTopAndBottom() &&
+        isMovingTowardsPaddle()) {
+      this.speedX = this.speedX * -1;
+      return true;
     }
     return false;
   }
 
-  hitsRedWallOfDoom(redWallOfDoom) {
-    if (this.x < redWallOfDoom.x) {
-      return true
+  missedPaddle(paddle, wall) {
+
+    //refactor!
+    if (this.x < paddle.x &&
+        (this.y < paddle.y ||
+        this.y > paddle.y + paddle.height)) {
+      this.missedFlag = true;
     }
-    return false;
+    if (this.x < wall.x && this.missedFlag) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
