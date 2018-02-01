@@ -2,6 +2,8 @@
 
 Playable demo: [Squash Game](http://squash-game.surge.sh/) on Surge
 
+![Squash Screenshot](https://image.ibb.co/kyQub6/Screenshot_at_Feb_01_21_42_29.png)
+
 ### Tech Stack:
 * Javascript (ES6, native, non-transpiled)
 * P5.js canvas library
