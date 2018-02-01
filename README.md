@@ -1,14 +1,17 @@
 # SQUASH GAME - P5.js
 
+Playable demo: [Squash Game](http://squash-game.surge.sh/) on Surge
+
 ### Tech Stack:
 * Javascript (ES6, native, non-transpiled)
 * P5.js canvas library
 * live-server for development
 
 ### Keybinds:
-* W - Up
-* S - Down
-* P - Pause
+* W - Paddle Up
+* S - Paddle Down
+* P - Pause Game
+* Space - Start
 
 ### Development:
 `yarn` to install dependencies  
