@@ -1,17 +1,18 @@
 class RedWallOfDoom {
   constructor() {
-    this.startTime = Date.now();
     this.x = 0;
+    this.speed = 2;
   }
 
-  draw(framerate) {
-    this.x = (Date.now() - this.startTime) / framerate / 10;
+  draw(timer, fps) {
+    this.x = timer / fps * this.speed;
+    if (this.x > window.innerWidth / 2) this.x = window.innerWidth / 2;
     noStroke();
     fill(200, 50, 50);
     rect(0, 0, this.x, window.innerHeight);
   }
 
   reset() {
-    this.startTime = Date.now();
+    this.x = 0;
   }
 }
