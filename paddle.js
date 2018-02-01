@@ -41,4 +41,8 @@ class Paddle {
       this.direction = 0;
     }
   }
+
+  reset() {
+    this.y = window.innerHeight / 2 - this.height / 2;
+  }
 }

@@ -4,16 +4,16 @@ const paddle = new Paddle();
 const score = new Score();
 let ball = new Ball();
 
-const RED_WALL_TO_PADDLE = 75;
+const RED_WALL_TO_PADDLE_DISTANCE = 75;
 // Key bindings
 const KEY_W = 87;
 const KEY_S = 83;
 
 function resetGame() {
-  ball = new Ball();
   redWallOfDoom.reset();
   score.reset();
-  // paddle.reset();
+  paddle.reset();
+  ball = new Ball();
 }
 
 function setup() {
@@ -28,7 +28,7 @@ function draw() {
   redWallOfDoom.draw();
 
   // Paddle
-  paddle.x = redWallOfDoom.x + RED_WALL_TO_PADDLE;
+  paddle.x = redWallOfDoom.x + RED_WALL_TO_PADDLE_DISTANCE;
   paddle.move();
   paddle.draw();
 
@@ -43,9 +43,10 @@ function draw() {
   if (ball.missedPaddle(paddle, redWallOfDoom)) resetGame();
 }
 
-function keyPressed() {
+function keyPressed(e) {
   if (keyCode === KEY_W) paddle.changeDirection('up');
   else if (keyCode === KEY_S) paddle.changeDirection('down');
+  if (keyCode === KEY_SPACE) console.log('SPACE PRESSED');
 }
 
 function keyReleased() {
