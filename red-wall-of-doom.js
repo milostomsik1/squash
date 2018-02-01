@@ -1,7 +1,7 @@
 class RedWallOfDoom {
   constructor() {
     this.x = 0;
-    this.speed = 2;
+    this.speed = 3;
   }
 
   draw(timer, fps) {

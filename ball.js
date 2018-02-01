@@ -7,8 +7,9 @@ class Ball {
     this.minYSpeed = 3;
     this.maxYSpeed = 10;
 
-    this.speedX = 10;
-    this.speedY = Math.round(Math.random() * (this.maxYSpeed  - this.minYSpeed) + this.minYSpeed);
+    this.xBaseSpeed = 15;
+    this.xSpeed = this.xBaseSpeed;
+    this.ySpeed = Math.round(Math.random() * (this.maxYSpeed  - this.minYSpeed) + this.minYSpeed);
     this.missed = false;
   }
 
@@ -19,10 +20,12 @@ class Ball {
   }
 
   move(paddle) {
-    if (this.speedX < 0) this.speedX = -score.points / 5 - 10;
-    if (this.speedX > 0) this.speedX = score.points / 5 + 10;
+    if (this.xSpeed < 0) this.xSpeed = -score.points / 5 - this.xBaseSpeed;
+    if (this.xSpeed > 0) this.xSpeed = score.points / 5 + this.xBaseSpeed;
+    if (this.xSpeed < -50) this.xSpeed = -50;
+    if (this.xSpeed > 50) this.xSpeed = 50;
 
-    this.x += this.speedX;
+    this.x += this.xSpeed;
 
     const passedThruPaddle = () => this.x - this.r <= paddle.x + paddle.width;
     const isBetweenPaddleTopAndBottom = () => this.y >= paddle.y && this.y <= paddle.y + paddle.height;
@@ -34,7 +37,7 @@ class Ball {
       this.x = paddleEdge;
     }
 
-    this.y += this.speedY;
+    this.y += this.ySpeed;
   }
 
   bounceOffWalls() {
@@ -43,22 +46,22 @@ class Ball {
     const hitsWindowRight = () => this.x >= windowWidth - this.r;
 
     if (hitsWindowBottom() || hitsWindowTop()) {
-      this.speedY = this.speedY * -1;
+      this.ySpeed = this.ySpeed * -1;
     }
     if (hitsWindowRight()) {
-      this.speedX = this.speedX * -1;
+      this.xSpeed = this.xSpeed * -1;
     }
   }
 
   hitsPaddle(paddle) {
-    const isMovingTowardsPaddle = () => this.speedX < 0;
+    const isMovingTowardsPaddle = () => this.xSpeed < 0;
     const isBetweenPaddleTopAndBottom = () => this.y >= paddle.y && this.y <= paddle.y + paddle.height;
     const isOnPaddleEdge = () => this.x - this.r === paddle.x + paddle.width
 
     if (isOnPaddleEdge() &&
         isBetweenPaddleTopAndBottom() &&
         isMovingTowardsPaddle()) {
-      this.speedX = this.speedX * -1;
+      this.xSpeed = this.xSpeed * -1;
       return true;
     }
     return false;
@@ -83,8 +86,8 @@ class Ball {
     this.x = window.innerWidth / 2;
     this.y = window.innerHeight / 2;
 
-    this.speedX = 10;
-    this.speedY = Math.round(Math.random() * (this.maxYSpeed  - this.minYSpeed) + this.minYSpeed);
+    this.xSpeed = 10;
+    this.ySpeed = Math.round(Math.random() * (this.maxYSpeed  - this.minYSpeed) + this.minYSpeed);
     this.missed = false;
   }
 }
