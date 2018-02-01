@@ -5,7 +5,7 @@ class Ball {
     this.r = 10;
 
     this.maxXSpeed = 50;
-    this.minYSpeed = 1;
+    this.minYSpeed = 3;
     this.maxYSpeed = 15;
 
     this.xBaseSpeed = 15;
