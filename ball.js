@@ -5,12 +5,13 @@ class Ball {
     this.r = 10;
 
     this.maxXSpeed = 50;
-    this.minYSpeed = 3;
-    this.maxYSpeed = 10;
+    this.minYSpeed = 1;
+    this.maxYSpeed = 15;
 
     this.xBaseSpeed = 15;
     this.xSpeed = this.xBaseSpeed;
     this.ySpeed = Math.round(Math.random() * (this.maxYSpeed  - this.minYSpeed) + this.minYSpeed);
+    this.ySpeed = Math.random() < 0.5 ? this.ySpeed : -this.ySpeed;
     this.missed = false;
   }
 
@@ -87,7 +88,8 @@ class Ball {
     this.x = window.innerWidth / 2;
     this.y = window.innerHeight / 2;
 
-    this.xSpeed = 10;
+    this.xBaseSpeed = 15;
+    this.xSpeed = this.xBaseSpeed;
     this.ySpeed = Math.round(Math.random() * (this.maxYSpeed  - this.minYSpeed) + this.minYSpeed);
     this.missed = false;
   }
