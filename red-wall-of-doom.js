@@ -4,10 +4,10 @@ class RedWallOfDoom {
     this.x = 0;
   }
 
-  draw() {
-    this.x = (Date.now() - this.startTime) / 500;
+  draw(framerate) {
+    this.x = (Date.now() - this.startTime) / framerate / 10;
     noStroke();
-    fill(255, 25, 25);
+    fill(200, 50, 50);
     rect(0, 0, this.x, window.innerHeight);
   }
 

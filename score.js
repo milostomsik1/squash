@@ -6,8 +6,9 @@ class Score {
   }
 
   draw() {
-    textSize(48);
-    text(`Score: ${this.points}`, this.x, this.y);
+    fill(255);
+    textSize(42);
+    text(`SCORE: ${this.points}`, this.x, this.y);
   }
 
   reset() {

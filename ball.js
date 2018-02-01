@@ -75,4 +75,13 @@ class Ball {
       return false;
     }
   }
+
+  reset() {
+    this.x = window.innerWidth / 2;
+    this.y = window.innerHeight / 2;
+
+    this.speedX = 10;
+    this.speedY = Math.round(Math.random() * (this.maxYSpeed  - this.minYSpeed) + this.minYSpeed);
+    this.missed = false;
+  }
 }
