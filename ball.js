@@ -1,5 +1,5 @@
 class Ball {
-  constructor() {
+  constructor(score) {
     this.x = window.innerWidth / 2;
     this.y = window.innerHeight / 2;
     this.r = 10;
@@ -19,6 +19,9 @@ class Ball {
   }
 
   move(paddle) {
+    if (this.speedX < 0) this.speedX = -score.points / 5 - 10;
+    if (this.speedX > 0) this.speedX = score.points / 5 + 10;
+
     this.x += this.speedX;
 
     const passedThruPaddle = () => this.x - this.r <= paddle.x + paddle.width;

@@ -2,7 +2,7 @@ const framerate =  60;
 const redWallOfDoom = new RedWallOfDoom();
 const paddle = new Paddle();
 const score = new Score();
-const ball = new Ball();
+const ball = new Ball(score);
 
 const RED_WALL_TO_PADDLE_DISTANCE = 75;
 
