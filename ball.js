@@ -8,8 +8,7 @@ class Ball {
     this.maxYSpeed = 10;
 
     this.speedX = 10;
-    // this.speedY = Math.round(Math.random() * (this.maxYSpeed  - this.minYSpeed) + this.minYSpeed);
-    this.speedY = 0;
+    this.speedY = Math.round(Math.random() * (this.maxYSpeed  - this.minYSpeed) + this.minYSpeed);
     this.missed = false;
   }
 
