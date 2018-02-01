@@ -29,16 +29,16 @@ function draw() {
 
   // Paddle
   paddle.x = redWallOfDoom.x + RED_WALL_TO_PADDLE;
-  paddle.draw();
   paddle.move();
+  paddle.draw();
 
   // Score
   score.draw();
 
   // Ball
-  ball.draw();
   ball.move(paddle);
-  ball.bounce();
+  ball.draw();
+  ball.bounceOffWalls();
   if (ball.hitsPaddle(paddle)) score.addPoint();
   if (ball.missedPaddle(paddle, redWallOfDoom)) resetGame();
 }

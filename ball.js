@@ -8,9 +8,9 @@ class Ball {
     this.maxYSpeed = 10;
 
     this.speedX = 10;
-    this.speedY = Math.round(Math.random() * (this.maxYSpeed  - this.minYSpeed) + this.minYSpeed);
-    // this.speedY = 0;
-    this.missedFlag = false;
+    // this.speedY = Math.round(Math.random() * (this.maxYSpeed  - this.minYSpeed) + this.minYSpeed);
+    this.speedY = 0;
+    this.missed = false;
   }
 
   draw() {
@@ -21,17 +21,21 @@ class Ball {
 
   move(paddle) {
     this.x += this.speedX;
+
     const passedThruPaddle = () => this.x - this.r <= paddle.x + paddle.width;
-    const isAboveOrUnderPaddle = () => this.y < paddle.y && this.y > paddle.y + paddle.height;
+    const isBetweenPaddleTopAndBottom = () => this.y >= paddle.y && this.y <= paddle.y + paddle.height;
+    const paddleEdge = paddle.x + paddle.width + this.r;
 
     if (passedThruPaddle() &&
-        isAboveOrUnderPaddle()) {
-      this.x = paddle.x + paddle.width + this.r;
+        isBetweenPaddleTopAndBottom() &&
+        this.missed === false) {
+      this.x = paddleEdge;
     }
+
     this.y += this.speedY;
   }
 
-  bounce() {
+  bounceOffWalls() {
     const hitsWindowBottom = () => this.y >= window.innerHeight - this.r;
     const hitsWindowTop = () => this.y <= this.r;
     const hitsWindowRight = () => this.x >= windowWidth - this.r;
@@ -45,11 +49,13 @@ class Ball {
   }
 
   hitsPaddle(paddle) {
-    const passedThruPaddle = () => this.x - this.r <= paddle.x + paddle.width;
+    // const passedThruPaddle = () => this.x - this.r <= paddle.x + paddle.width;
     const isMovingTowardsPaddle = () => this.speedX < 0;
     const isBetweenPaddleTopAndBottom = () => this.y >= paddle.y && this.y <= paddle.y + paddle.height;
+    const isOnPaddle = () => this.x - this.r === paddle.x + paddle.width
 
-    if (passedThruPaddle() &&
+    // if (passedThruPaddle() &&
+    if (isOnPaddle() &&
         isBetweenPaddleTopAndBottom() &&
         isMovingTowardsPaddle()) {
       this.speedX = this.speedX * -1;
@@ -64,9 +70,9 @@ class Ball {
     if (this.x < paddle.x &&
         (this.y < paddle.y ||
         this.y > paddle.y + paddle.height)) {
-      this.missedFlag = true;
+      this.missed = true;
     }
-    if (this.x < wall.x && this.missedFlag) {
+    if (this.x < wall.x && this.missed) {
       return true;
     } else {
       return false;
