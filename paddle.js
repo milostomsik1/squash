@@ -1,10 +1,11 @@
 class Paddle {
   constructor() {
-    this.height = 200;
+    this.height = window.innerHeight / 5;
     this.x = 0;
     this.y = window.innerHeight / 2 - this.height / 2;
     this.width = 5;
     this.direction = 0;
+    // this.speed = window.innerHeight / 60; // ~ 15px
     this.speed = 15;
   }
 

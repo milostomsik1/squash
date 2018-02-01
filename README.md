@@ -12,6 +12,23 @@
 
 ### Development:
 `yarn` to install dependencies  
-`yarn dev` to run the development environmen
+`yarn dev` to run the development environment
 
-Runs natively on modern browsers that support ES6 syntax
+### Production:
+Open `index.html`
+
+Runs natively on modern browsers that support ES6 syntax.  
+Defaults to 60FPS refresh rate.
+
+### Features:
+* Red Wall Of Doom that slowly moves towards and is limited to middle of the screen reducing the available reaction time
+* Ball speed is equal to base value plus fraction of score points and max speed is limited
+
+### TODO:
+* UI scaling for different sized devices
+* Implement xUnit, yUnit relative to window size
+* Fix window resize
+* Graphical improvements
+* Improve ball Y direction
+* Delay before spawning new ball
+* Add mobile support

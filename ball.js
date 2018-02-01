@@ -4,6 +4,7 @@ class Ball {
     this.y = window.innerHeight / 2;
     this.r = 10;
 
+    this.maxXSpeed = 50;
     this.minYSpeed = 3;
     this.maxYSpeed = 10;
 
@@ -22,8 +23,8 @@ class Ball {
   move(paddle) {
     if (this.xSpeed < 0) this.xSpeed = -score.points / 5 - this.xBaseSpeed;
     if (this.xSpeed > 0) this.xSpeed = score.points / 5 + this.xBaseSpeed;
-    if (this.xSpeed < -50) this.xSpeed = -50;
-    if (this.xSpeed > 50) this.xSpeed = 50;
+    if (this.xSpeed < -this.maxXSpeed) this.xSpeed = -this.maxXSpeed;
+    if (this.xSpeed > this.maxXSpeed) this.xSpeed = this.maxXSpeed;
 
     this.x += this.xSpeed;
 
