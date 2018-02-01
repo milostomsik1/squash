@@ -48,13 +48,11 @@ class Ball {
   }
 
   hitsPaddle(paddle) {
-    // const passedThruPaddle = () => this.x - this.r <= paddle.x + paddle.width;
     const isMovingTowardsPaddle = () => this.speedX < 0;
     const isBetweenPaddleTopAndBottom = () => this.y >= paddle.y && this.y <= paddle.y + paddle.height;
-    const isOnPaddle = () => this.x - this.r === paddle.x + paddle.width
+    const isOnPaddleEdge = () => this.x - this.r === paddle.x + paddle.width
 
-    // if (passedThruPaddle() &&
-    if (isOnPaddle() &&
+    if (isOnPaddleEdge() &&
         isBetweenPaddleTopAndBottom() &&
         isMovingTowardsPaddle()) {
       this.speedX = this.speedX * -1;

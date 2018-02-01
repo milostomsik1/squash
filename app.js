@@ -5,9 +5,11 @@ const score = new Score();
 let ball = new Ball();
 
 const RED_WALL_TO_PADDLE_DISTANCE = 75;
-// Key bindings
+
+// Key Bindings
 const KEY_W = 87;
 const KEY_S = 83;
+const KEY_SPACE = 32;
 
 function resetGame() {
   redWallOfDoom.reset();
@@ -22,6 +24,8 @@ function setup() {
 }
 
 function draw() {
+  // fixes mac window height problem
+  window.scrollTo(0,0);
   background(42);
 
   // Red Wall Of Doom
